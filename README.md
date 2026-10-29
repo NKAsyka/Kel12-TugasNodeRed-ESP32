@@ -2,7 +2,7 @@
 tes tes 123
 
 ## Video
-- Video presentasi (maks. 7 menit): **[isi link di sini]**
+- Video presentasi (maks. 7 menit): **[isi link di sini]** gw jaog bat
 - Video demo alat (maks. 5 menit): **[isi link di sini]**
 
 ## Deskripsi
