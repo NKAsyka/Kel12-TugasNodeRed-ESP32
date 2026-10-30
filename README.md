@@ -1,7 +1,8 @@
 # KelX-TugasNodeRED-ESP32
+tes tes 123
 
 ## Video
-- Video presentasi (maks. 7 menit): **[isi link di sini]**
+- Video presentasi (maks. 7 menit): **[isi link di sini]** gw jaog bat
 - Video demo alat (maks. 5 menit): **[isi link di sini]**
 
 ## Deskripsi
@@ -10,10 +11,10 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 ## Anggota Kelompok
 | Anggota | Nama | NRP | Tanggung jawab |
 |---|---|---|---|
-| 1 | [Nama anggota 1] | [NRP] | Ruang 1; integrasi ESP32 dan MQTT |
-| 2 | [Nama anggota 2] | [NRP] | Ruang 2; dashboard Node-RED |
-| 3 | [Nama anggota 3] | [NRP] | Ruang 3; dokumentasi dan pengujian |
-| 4 | [Nama anggota 4] | [NRP] | Ruang 4; integrasi GitHub dan video |
+| 1 | [M. Akmalul Ihsan]     | [2124600093] | Ruang 1; integrasi ESP32 dan MQTT   |
+| 2 | [M. Jefri Al Bukhori]b | [2124600098] | Ruang 2; dashboard Node-RED         |
+| 3 | [Ahmad Syahrial Karim] | [2124600100] | Ruang 3; dokumentasi dan pengujian  |
+| 4 | [Lailiah Ratu Nova]    | [2124600104] | Ruang 4; integrasi GitHub dan video |
 
 > Ganti semua placeholder `[ ... ]`, `KelX`, dan `klpX` dengan data kelompok yang benar.
 
@@ -35,36 +36,36 @@ ESP32 Ruang 4 ─┘       └── perintah lampu┘
 | LED lampu 2 + resistor 220 Ω | GPIO26 | Anoda ke pin melalui resistor, katoda ke GND |
 
 ## Broker dan topik MQTT
-- Broker: `broker.mqttdashboard.com`
+- Broker: `broker.emqx.io`
 - Port: `1883`
-- Prefix wajib: `pens/klpX/` (ganti `klpX` dengan nomor kelompok).
+- Prefix wajib: `pens/klp12/` 
 
-| Fungsi | Topic | Arah | Payload |
+|
+Fungsi | Topic | Arah | Payload |
 |---|---|---|---|
-| Suhu | `pens/klpX/ruangN/temperature` | ESP32 → Node-RED | angka °C, 1 desimal |
-| Kelembapan | `pens/klpX/ruangN/humidity` | ESP32 → Node-RED | angka %, 1 desimal |
-| Lampu 1 | `pens/klpX/ruangN/lamp1` | Node-RED → ESP32 | string `1` / `0` |
-| Lampu 2 | `pens/klpX/ruangN/lamp2` | Node-RED → ESP32 | string `1` / `0` |
-| Status | `pens/klpX/ruangN/status` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
+| Suhu | `pens/klp12/ruang1/temperature` | ESP32 → Node-RED | angka °C, 1 desimal |
+| Kelembapan | `pens/klp12/ruang1/humidity` | ESP32 → Node-RED | angka %, 1 desimal |
+| Lampu 1 | `pens/klp12/ruang1/lamp1` | Node-RED → ESP32 | string `1` / `0` |
+| Lampu 2 | `pens/klp12/ruang1/lamp2` | Node-RED → ESP32 | string `1` / `0` |
+| Status | `pens/klpX/ruang1/status` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
 
-`N` diganti dengan nomor ruang 1–4. Semua nama topic harus sama persis, termasuk huruf besar-kecil.
 
 ## Isi dashboard
 - Tab: **Gedung**
 - Group **Suhu**: satu line chart dengan empat garis bernama `ruang1`–`ruang4`.
 - Group tiap ruangan: satu gauge kelembapan 0–100%, dua saklar lampu, dan indikator status koneksi.
-- Alamat lokal: `http://localhost:1880/ui`
+- Alamat lokal: `http://localhost:1883/ui`
 - Akses dari HP di jaringan yang sama: `http://IP_LAPTOP:1880/ui`
 
-## Menjalankan sistem
+## Menjalankan sisteml
 1. Install Node.js dan Node-RED, lalu jalankan Node-RED.
 2. Dari **Menu → Manage palette → Install**, install `node-red-dashboard`.
 3. Import `node-red/flows.json` melalui **Menu → Import → select a file**, lalu lakukan Deploy.
-4. Edit konfigurasi broker pada flow bila broker berubah. Pastikan prefix `klpX` pada topic dashboard cocok dengan prefix pada kode ESP32.
-5. Di Arduino IDE, install `EspMQTTClient`, `DHT sensor library`, dan `Adafruit Unified Sensor`.
-6. Pada file `.ino`, ubah `ROOM`, `WIFI_SSID`, `WIFI_PASS`, dan `KELOMPOK` sesuai konfigurasi kelompok/ruangan. Gunakan Client ID unik tiap board.
-7. Upload kode ke masing-masing ESP32. Buka Serial Monitor pada 115200 baud.
-8. Buka dashboard di `http://localhost:1880/ui` dan uji sensor, saklar, serta status.
+4. Edit konfigurasi broker pada flow bila broker berubah. Pastikan prefix `klp12` pada topic dashboard cocok dengan prefix pada kode ESP32.
+6. Di Arduino IDE, install `EspMQTTClient`, `DHT sensor library`, dan `Adafruit Unified Sensor`.
+7. Pada file `.ino`, ubah `ROOM`, `WIFI_SSID`, `WIFI_PASS`, dan `KELOMPOK` sesuai konfigurasi kelompok/ruangan. Gunakan Client ID unik tiap board.
+8. Upload kode ke masing-masing ESP32. Buka Serial Monitor pada 115200 baud.
+9. Buka dashboard di `http://localhost:1880/ui` dan uji sensor, saklar, serta status.
 
 ## Bukti dan pengujian
 Simpan gambar di `docs/images/` dengan nama yang jelas, misalnya:
