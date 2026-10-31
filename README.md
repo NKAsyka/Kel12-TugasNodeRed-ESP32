@@ -11,10 +11,10 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 ## Anggota Kelompok
 | Anggota | Nama | NRP | Tanggung jawab |
 |---|---|---|---|
-| 1 | [M. Akmalul Ihsan]     | [2124600093] | Ruang 1; integrasi ESP32 dan MQTT   |
-| 2 | [M. Jefri Al Bukhori]b | [2124600098] | Ruang 2; dokumentasi dan pengujian  |
-| 3 | [Ahmad Syahrial Karim] | [2124600100] | Ruang 3; dashboard Node-RED         |
-| 4 | [Lailiah Ratu Nova]    | [2124600104] | Ruang 4; integrasi GitHub dan video |
+| 1 | Moh Akmalul Ihsan      | (2124600093) | Ruang 1; integrasi ESP32 dan MQTT   |
+| 2 | Moh Jefri Al Bukhori   | (2124600098) | Ruang 2; dokumentasi dan pengujian  |
+| 3 | Ahmad Syahrial Karim   | (2124600100) | Ruang 3; dashboard Node-RED         |
+| 4 | Lailiah Ratu Nova      | (2124600104) | Ruang 4; integrasi GitHub dan video |
 
 > Ganti semua placeholder `[ ... ]`, `KelX`, dan `klpX` dengan data kelompok yang benar.
 
