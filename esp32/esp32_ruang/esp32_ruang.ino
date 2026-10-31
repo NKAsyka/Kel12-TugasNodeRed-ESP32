@@ -16,8 +16,8 @@ const char* ROOM = "pens/klp12/ruang2/";
 // 2. KONFIGURASI WIFI
 // ==================================================
 
-const char* WIFI_SSID = "wlan";
-const char* WIFI_PASS = "12345678";
+const char* WIFI_SSID = "SSID_LAB";
+const char* WIFI_PASS = "PASSWORD_LAB";
 
 // ==================================================
 // 3. KONFIGURASI MQTT EMQX PUBLIC
