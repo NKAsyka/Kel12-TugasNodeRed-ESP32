@@ -56,7 +56,7 @@ Fungsi | Topic | Arah | Payload |
 - Alamat lokal: `http://localhost:1883/ui`
 - Akses dari HP di jaringan yang sama: `192.168.10.44:1883/ui`
 
-## Menjalankan sisteml
+## Menjalankan sistem
 1. Install Node.js dan Node-RED, lalu jalankan Node-RED.
 2. Dari **Menu → Manage palette → Install**, install `node-red-dashboard`.
 3. Import `node-red/flows.json` melalui **Menu → Import → select a file**, lalu lakukan Deploy.
@@ -67,7 +67,6 @@ Fungsi | Topic | Arah | Payload |
 9. Buka dashboard di `http://localhost:1880/ui` dan uji sensor, saklar, serta status.
 
 ## Bukti dan pengujian
-Simpan gambar di `docs/images/` dengan nama yang jelas, misalnya:
 - `rangkaian.jpg`
 - `flow.png`
 - `dashboard.png`
@@ -76,18 +75,18 @@ Simpan gambar di `docs/images/` dengan nama yang jelas, misalnya:
 
 | Uji | Hasil | Keterangan |
 |---|---|---|
-| T1 Koneksi MQTT | [✓] | [Koneksi ke broker berhasil; pesan konfirmasi muncul di Serial Monitor.] |
-| T2 Data 4 ruang | [✓] | [Data tiap ruang diterima Node-RED dan muncul di tab Debug] |
-| T3 Chart suhu | [✓] | [Chart menampilkan garis ruang1 sampai ruang4 sesuai nama topic] |
-| T4 Sensor berubah | [✓] | [Hanya data ruang2 yang berubah; ruangan lain tidak terpengaruh] |
-| T5 Lampu tepat sasaran | [✓] | [Hanya lampu 2 ruang3 yang menyala lewat saklar dashboard] |
-| T6 Matikan lampu | [✓] | [Lampu 2 ruang3 mati saat saklar dimatikan] |
-| T7 Payload salah | [✓] | [Payload ON diabaikan; lampu tidak berubah dan ESP32 tetap berjalan] |
-| T8 Status online | [✓] | [Indikator status keempat ruang menampilkan online] |
-| T9 LWT offline | [✓] | [Status ruang4 berubah menjadi offline setelah daya dicabut (LWT)] |
-| T10 Retained status | [✓] | [Status langsung tampil setelah Node-RED di-restart (retained message)] |
-| T11 Reconnect | [✓] | [ESP32 tersambung kembali otomatis dan status kembali online] |
-| T12 Akses HP | [✓] | [Dashboard dan saklar berfungsi dari HP di jaringan yang sama] |
+| T1 Koneksi MQTT | [✓] | Koneksi ke broker berhasil; pesan konfirmasi muncul di Serial Monitor. |
+| T2 Data 4 ruang | [✓] | Data tiap ruang diterima Node-RED dan muncul di tab Debug |
+| T3 Chart suhu | [✓] | Chart menampilkan garis ruang1 sampai ruang4 sesuai nama topic |
+| T4 Sensor berubah | [✓] | Hanya data ruang2 yang berubah; ruangan lain tidak terpengaruh |
+| T5 Lampu tepat sasaran | [✓] | Hanya lampu 2 ruang3 yang menyala lewat saklar dashboard |
+| T6 Matikan lampu | [✓] | Lampu 2 ruang3 mati saat saklar dimatikan |
+| T7 Payload salah | [✓] | Payload ON diabaikan; lampu tidak berubah dan ESP32 tetap berjalan |
+| T8 Status online | [✓] | Indikator status keempat ruang menampilkan online |
+| T9 LWT offline | [✓] | Status ruang4 berubah menjadi offline setelah daya dicabut (LWT) |
+| T10 Retained status | [✓] | Status langsung tampil setelah Node-RED di-restart (retained message) |
+| T11 Reconnect | [✓] | ESP32 tersambung kembali otomatis dan status kembali online |
+| T12 Akses HP | [✓] | Dashboard dan saklar berfungsi dari HP di jaringan yang sama |
 
 Ruangan simulasi (jika ada): **[tulis ruang dan metode simulasi; minimal 2 ESP32 sungguhan sesuai modul]**
 
@@ -97,14 +96,3 @@ Ruangan simulasi (jika ada): **[tulis ruang dan metode simulasi; minimal 2 ESP32
 | Dua ESP32 saling putus-sambung |	clientId unik berbasis MAC • topik per ruang • cek stabilitas Wi-Fi • reconnect non-blocking |
 Chart hanya satu garis | Pisahkan topik temperature dan humidity, atau konfigurasi multi-series pada chart Node-RED |
 Status offline lama muncul | Retained LWT yang benar • publish online retained • status per ruang • tangani retained subscriber |
-
-
-## Struktur repository
-KelX-TugasNodeRED-ESP32/
-├── README.md
-├── esp32/esp32_ruang/esp32_ruang.ino
-├── node-red/flows.json
-├── docs/laporan.pdf
-├── docs/images/
-└── video/LINK.md
-
