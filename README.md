@@ -1,9 +1,8 @@
 # KelX-TugasNodeRED-ESP32
-tes tes 123
 
 ## Video
 - Video presentasi (maks. 7 menit): **[isi link di sini]** gw jaog bat
-- Video demo alat (maks. 5 menit): **[isi link di sini]**
+- Video demo alat (maks. 5 menit): **[https://youtu.be/EFjaDAxAD6o?si=UwSpxen0CkvJ5SAb]**
 
 ## Deskripsi
 Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengirim suhu serta kelembapan setiap ruangan melalui MQTT. Node-RED menerima data, menampilkan grafik dan gauge pada dashboard, serta mengirim perintah untuk mengendalikan dua lampu LED di masing-masing ruangan.
@@ -16,10 +15,10 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 | 3 | Ahmad Syahrial Karim   | (2124600100) | Ruang 3; dashboard Node-RED         |
 | 4 | Lailiah Ratu Nova      | (2124600104) | Ruang 4; integrasi GitHub dan video |
 
-> Ganti semua placeholder `[ ... ]`, `KelX`, dan `klpX` dengan data kelompok yang benar.
 
 ## Arsitektur
-```text
+Alur data: empat ESP32 mem-publish temperature, humidity, dan status ke broker, lalu Node-RED melakukan subscribe dengan wildcard dan menampilkannya di dashboard (http://localhost:1880/ui). Arah sebaliknya, saklar dashboard mem-publish lamp1/lamp2 ke broker dan diterima ESP32 ruangan yang dituju.
+
 ESP32 Ruang 1 ─┐
 ESP32 Ruang 2 ─┼──> MQTT broker ──> Node-RED ──> Dashboard /ui
 ESP32 Ruang 3 ─┤       ▲                │
@@ -77,29 +76,27 @@ Simpan gambar di `docs/images/` dengan nama yang jelas, misalnya:
 
 | Uji | Hasil | Keterangan |
 |---|---|---|
-| T1 Koneksi MQTT | [✓/✗] | [Catatan hasil] |
-| T2 Data 4 ruang | [✓/✗] | [Catatan hasil] |
-| T3 Chart suhu | [✓/✗] | [Catatan hasil] |
-| T4 Sensor berubah | [✓/✗] | [Catatan hasil] |
-| T5 Lampu tepat sasaran | [✓/✗] | [Catatan hasil] |
-| T6 Matikan lampu | [✓/✗] | [Catatan hasil] |
-| T7 Payload salah | [✓/✗] | [Catatan hasil] |
-| T8 Status online | [✓/✗] | [Catatan hasil] |
-| T9 LWT offline | [✓/✗] | [Catatan hasil] |
-| T10 Retained status | [✓/✗] | [Catatan hasil] |
-| T11 Reconnect | [✓/✗] | [Catatan hasil] |
-| T12 Akses HP | [✓/✗] | [Catatan hasil] |
+| T1 Koneksi MQTT | [✓] | [Koneksi ke broker berhasil; pesan konfirmasi muncul di Serial Monitor.] |
+| T2 Data 4 ruang | [✓] | [Data tiap ruang diterima Node-RED dan muncul di tab Debug] |
+| T3 Chart suhu | [✓] | [Chart menampilkan garis ruang1 sampai ruang4 sesuai nama topic] |
+| T4 Sensor berubah | [✓] | [Hanya data ruang2 yang berubah; ruangan lain tidak terpengaruh] |
+| T5 Lampu tepat sasaran | [✓] | [Hanya lampu 2 ruang3 yang menyala lewat saklar dashboard] |
+| T6 Matikan lampu | [✓] | [Lampu 2 ruang3 mati saat saklar dimatikan] |
+| T7 Payload salah | [✓] | [Payload ON diabaikan; lampu tidak berubah dan ESP32 tetap berjalan] |
+| T8 Status online | [✓] | [Indikator status keempat ruang menampilkan online] |
+| T9 LWT offline | [✓] | [Status ruang4 berubah menjadi offline setelah daya dicabut (LWT)] |
+| T10 Retained status | [✓] | [Status langsung tampil setelah Node-RED di-restart (retained message)] |
+| T11 Reconnect | [✓] | [ESP32 tersambung kembali otomatis dan status kembali online] |
+| T12 Akses HP | [✓] | [Dashboard dan saklar berfungsi dari HP di jaringan yang sama] |
 
 Ruangan simulasi (jika ada): **[tulis ruang dan metode simulasi; minimal 2 ESP32 sungguhan sesuai modul]**
 
 ## Kendala dan solusi
 | Kendala | Solusi yang dilakukan |
 |---|---|
-| Dashboard kosong | Cocokkan broker, prefix topic, lalu Deploy ulang |
-| Chart hanya satu garis | Pastikan function mengubah `msg.topic` menjadi nama ruang |
-| Data DHT11 `nan` | Periksa pin DATA, VCC, GND, dan interval pembacaan |
-| Lampu tidak merespons | Periksa topic, payload string `1`/`0`, pin, dan wiring |
-| Status offline terlambat | LWT dipicu setelah broker mendeteksi koneksi putus; waktu dapat sekitar 1,5 × keep-alive |
+| Dua ESP32 saling putus-sambung |	clientId unik berbasis MAC • topik per ruang • cek stabilitas Wi-Fi • reconnect non-blocking |
+Chart hanya satu garis | Pisahkan topik temperature dan humidity, atau konfigurasi multi-series pada chart Node-RED |
+Status offline lama muncul | Retained LWT yang benar • publish online retained • status per ruang • tangani retained subscriber |
 
 ## Pembagian tugas
 Sesuaikan tabel anggota dan tanggung jawab di atas dengan pembagian aktual. Setiap anggota minimal membuat dua commit bermakna atas kontribusinya sendiri. Commit harus dilakukan oleh akun GitHub masing-masing; jangan membuat commit palsu atas nama anggota lain.
