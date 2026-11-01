@@ -17,13 +17,13 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 
 
 ## Arsitektur
-Alur data: empat ESP32 mem-publish temperature, humidity, dan status ke broker, lalu Node-RED melakukan subscribe dengan wildcard dan menampilkannya di dashboard (http://localhost:1880/ui). Arah sebaliknya, saklar dashboard mem-publish lamp1/lamp2 ke broker dan diterima ESP32 ruangan yang dituju.
+Alur data: empat ESP32 mem-publish temperature, humidity, dan status ke broker, lalu Node-RED melakukan subscribe dengan wildcard dan menampilkannya di dashboard (http://localhost:1883/ui). Arah sebaliknya, saklar dashboard mem-publish lamp1/lamp2 ke broker dan diterima ESP32 ruangan yang dituju.
 
 ESP32 Ruang 1 ─┐
 ESP32 Ruang 2 ─┼──> MQTT broker ──> Node-RED ──> Dashboard /ui
 ESP32 Ruang 3 ─┤       ▲                │
 ESP32 Ruang 4 ─┘       └── perintah lampu┘
-```
+
 
 ## Perangkat keras per ruangan
 | Komponen | Pin ESP32 | Catatan |
