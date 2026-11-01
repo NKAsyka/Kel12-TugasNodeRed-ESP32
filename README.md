@@ -98,8 +98,6 @@ Ruangan simulasi (jika ada): **[tulis ruang dan metode simulasi; minimal 2 ESP32
 Chart hanya satu garis | Pisahkan topik temperature dan humidity, atau konfigurasi multi-series pada chart Node-RED |
 Status offline lama muncul | Retained LWT yang benar • publish online retained • status per ruang • tangani retained subscriber |
 
-## Pembagian tugas
-Sesuaikan tabel anggota dan tanggung jawab di atas dengan pembagian aktual. Setiap anggota minimal membuat dua commit bermakna atas kontribusinya sendiri. Commit harus dilakukan oleh akun GitHub masing-masing; jangan membuat commit palsu atas nama anggota lain.
 
 ## Struktur repository
 ```text
