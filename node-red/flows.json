@@ -1,1 +1,1356 @@
-
+[
+    {
+        "id": "879f9b67e3dfedd9",
+        "type": "tab",
+        "label": "Gedung MQTT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d504451ae105f3c6",
+        "type": "group",
+        "z": "879f9b67e3dfedd9",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#767676"
+        },
+        "nodes": [
+            "a5dd0e23cc85d476",
+            "76b4b57a6193839d",
+            "baa163f07cc97807",
+            "f850782fc08a13a0"
+        ],
+        "x": 774,
+        "y": 19,
+        "w": 212,
+        "h": 202
+    },
+    {
+        "id": "11ce2f4c0496f568",
+        "type": "mqtt in",
+        "z": "879f9b67e3dfedd9",
+        "name": "MQTT in suhu semua ruang",
+        "topic": "pens/klp12/+/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "0b214e25b5b7b5aa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "978f6219f1ec1aa6",
+                "ab4f84e359bad3ed",
+                "565dcc1854c17734"
+            ]
+        ]
+    },
+    {
+        "id": "978f6219f1ec1aa6",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "ambil nama ruang",
+        "func": "const parts = msg.topic.split(\"/\");\nmsg.topic = parts[2] + \" suhu\";     // \"ruang2 suhu\" -> nama garis di chart\nmsg.payload = Number(msg.payload);  // teks -> angka\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 420,
+        "wires": [
+            [
+                "6d51cd1a524d823f",
+                "88f240f563b7221b",
+                "f122d2dbf9de5e9d",
+                "565dcc1854c17734"
+            ]
+        ]
+    },
+    {
+        "id": "ab4f84e359bad3ed",
+        "type": "debug",
+        "z": "879f9b67e3dfedd9",
+        "name": "Debug suhu (mentah)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6d51cd1a524d823f",
+        "type": "ui_chart",
+        "z": "879f9b67e3dfedd9",
+        "name": "Chart Suhu ",
+        "group": "e966d82025e9079e",
+        "order": 1,
+        "width": "25",
+        "height": "8",
+        "label": "Riwayat realtime suhu (°C) semua ruangan",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Menunggu data...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#ff7f0e",
+            "#2ca02c",
+            "#d62728",
+            "#9467bd",
+            "#8c564b",
+            "#e377c2",
+            "#7f7f7f",
+            "#bcbd22"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 890,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88f240f563b7221b",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "cek suhu > 32",
+        "func": "if (msg.payload > 32) {\n    return { payload: msg.topic.split(\" \")[0] + \" panas: \" + msg.payload + \" °C\", topic: msg.topic.split(\" \")[0] };\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 460,
+        "wires": [
+            [
+                "b1154433201c2ccf"
+            ]
+        ]
+    },
+    {
+        "id": "b1154433201c2ccf",
+        "type": "ui_toast",
+        "z": "879f9b67e3dfedd9",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "red",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Peringatan suhu",
+        "name": "Toast peringatan suhu",
+        "x": 1180,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "cb57deb463208a7d",
+        "type": "mqtt in",
+        "z": "879f9b67e3dfedd9",
+        "name": "MQTT in kelembapan semua ruang",
+        "topic": "pens/klp12/+/humidity",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "0b214e25b5b7b5aa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 120,
+        "wires": [
+            [
+                "cc9b19e034000c9e",
+                "a1dc396b579d4210",
+                "565dcc1854c17734"
+            ]
+        ]
+    },
+    {
+        "id": "a1dc396b579d4210",
+        "type": "debug",
+        "z": "879f9b67e3dfedd9",
+        "name": "Debug kelembapan",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cc9b19e034000c9e",
+        "type": "switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "routing kelembapan per ruang",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ruang1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang3",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "a5dd0e23cc85d476"
+            ],
+            [
+                "76b4b57a6193839d"
+            ],
+            [
+                "baa163f07cc97807"
+            ],
+            [
+                "f850782fc08a13a0"
+            ]
+        ]
+    },
+    {
+        "id": "a5dd0e23cc85d476",
+        "type": "ui_gauge",
+        "z": "879f9b67e3dfedd9",
+        "g": "d504451ae105f3c6",
+        "name": "Gauge ruang1",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 1,
+        "width": "9",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Kelembapan",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 880,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "76b4b57a6193839d",
+        "type": "ui_gauge",
+        "z": "879f9b67e3dfedd9",
+        "g": "d504451ae105f3c6",
+        "name": "Gauge ruang2",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 1,
+        "width": "8",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Kelembapan",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 880,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "baa163f07cc97807",
+        "type": "ui_gauge",
+        "z": "879f9b67e3dfedd9",
+        "g": "d504451ae105f3c6",
+        "name": "Gauge ruang3",
+        "group": "74ca56f27dd6a552",
+        "order": 1,
+        "width": "8",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Kelembapan",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 880,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f850782fc08a13a0",
+        "type": "ui_gauge",
+        "z": "879f9b67e3dfedd9",
+        "g": "d504451ae105f3c6",
+        "name": "Gauge ruang4",
+        "group": "bd837bdfbf305cab",
+        "order": 1,
+        "width": "8",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Kelembapan",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c1c530b4680255fa",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "format status ESP32",
+        "func": "// payload online/offline -> teks berwarna (topic tetap utk routing)\nconst on = String(msg.payload).trim() === \"online\";\nmsg.payload = on ? '<font color=\"green\"><b>ONLINE</b></font>' : '<font color=\"red\"><b>OFFLINE</b></font>';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 660,
+        "wires": [
+            [
+                "14eb2bcb1599b241"
+            ]
+        ]
+    },
+    {
+        "id": "431015b22627787b",
+        "type": "mqtt in",
+        "z": "879f9b67e3dfedd9",
+        "name": "MQTT in status semua ruang",
+        "topic": "pens/klp12/+/pstatus",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "0b214e25b5b7b5aa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "c1c530b4680255fa",
+                "7b84f9d8da96d012"
+            ]
+        ]
+    },
+    {
+        "id": "7b84f9d8da96d012",
+        "type": "debug",
+        "z": "879f9b67e3dfedd9",
+        "name": "Debug status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "14eb2bcb1599b241",
+        "type": "switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "routing status per ruang",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ruang1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang3",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 930,
+        "y": 660,
+        "wires": [
+            [
+                "1cc6890123afcfa4"
+            ],
+            [
+                "ee37e20dc0b1ea6c"
+            ],
+            [
+                "070996e416e1aa8a"
+            ],
+            [
+                "30e8b83d7cb21b18"
+            ]
+        ]
+    },
+    {
+        "id": "1cc6890123afcfa4",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Status ESP32 ruang1",
+        "label": "ESP32",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1260,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "ee37e20dc0b1ea6c",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Status ESP32 ruang2",
+        "label": "ESP32",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1260,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "070996e416e1aa8a",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "74ca56f27dd6a552",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Status ESP32 ruang3",
+        "label": "ESP32",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1260,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "30e8b83d7cb21b18",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "bd837bdfbf305cab",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Status ESP32 ruang4",
+        "label": "ESP32",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1260,
+        "y": 730,
+        "wires": []
+    },
+    {
+        "id": "23333f8897e11d4b",
+        "type": "mqtt out",
+        "z": "879f9b67e3dfedd9",
+        "name": "MQTT QOS",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0b214e25b5b7b5aa",
+        "x": 1210,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "3f6cd974dabf2fb5",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 1 ruang1",
+        "label": "Lampu 1",
+        "tooltip": "",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang1/lamp1/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 840,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "3a2ad7684fd81b98",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 2 ruang1",
+        "label": "Lampu 2",
+        "tooltip": "",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang1/lamp2/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 880,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "8b4c88431b27d6d7",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 1 ruang2",
+        "label": "Lampu 1",
+        "tooltip": "",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang2/lamp1/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 920,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "4ff4bb4d472250ee",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 2 ruang2",
+        "label": "Lampu 2",
+        "tooltip": "",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang2/lamp2/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 960,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "1674d24bb203879f",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 1 ruang3",
+        "label": "Lampu 1",
+        "tooltip": "",
+        "group": "74ca56f27dd6a552",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang3/lamp1/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 1000,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "02bca759f0a9d920",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 2 ruang3",
+        "label": "Lampu 2",
+        "tooltip": "",
+        "group": "74ca56f27dd6a552",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang3/lamp2/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 1040,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "d889cc24da71a001",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 1 ruang4",
+        "label": "Lampu 1",
+        "tooltip": "",
+        "group": "bd837bdfbf305cab",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang4/lamp1/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 1100,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "982d4795887ebb05",
+        "type": "ui_switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "Lampu 2 ruang4",
+        "label": "Lampu 2",
+        "tooltip": "",
+        "group": "bd837bdfbf305cab",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "pens/klp12/ruang4/lamp2/set",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 900,
+        "y": 1160,
+        "wires": [
+            [
+                "23333f8897e11d4b"
+            ]
+        ]
+    },
+    {
+        "id": "84072ed0d40d6a57",
+        "type": "mqtt in",
+        "z": "879f9b67e3dfedd9",
+        "name": "MQTT in state lampu",
+        "topic": "pens/klp12/+/+/state",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "0b214e25b5b7b5aa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 980,
+        "wires": [
+            [
+                "d6d4ccbff881cc47",
+                "75f9a73e18c73b58",
+                "1c6157699923b1b9"
+            ]
+        ]
+    },
+    {
+        "id": "1c6157699923b1b9",
+        "type": "debug",
+        "z": "879f9b67e3dfedd9",
+        "name": "Debug state lampu",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "d6d4ccbff881cc47",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "state -> saklar yang sesuai",
+        "func": "// topic: pens/klpX/ruangN/lampM/state -> output ke-(N-1)*2+(M-1)\nconst p = msg.topic.split(\"/\");\nconst room = parseInt(p[2].replace(\"ruang\", \"\"));\nconst lamp = parseInt(p[3].replace(\"lamp\", \"\"));\nif (!(room >= 1 && room <= 4 && (lamp === 1 || lamp === 2))) return null;\nconst out = new Array(8).fill(null);\nout[(room - 1) * 2 + (lamp - 1)] = { payload: String(msg.payload).trim() };\nreturn out;",
+        "outputs": 8,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 980,
+        "wires": [
+            [
+                "3f6cd974dabf2fb5"
+            ],
+            [
+                "3a2ad7684fd81b98"
+            ],
+            [
+                "8b4c88431b27d6d7"
+            ],
+            [
+                "4ff4bb4d472250ee"
+            ],
+            [
+                "1674d24bb203879f"
+            ],
+            [
+                "02bca759f0a9d920"
+            ],
+            [
+                "d889cc24da71a001"
+            ],
+            [
+                "982d4795887ebb05"
+            ]
+        ]
+    },
+    {
+        "id": "75f9a73e18c73b58",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "state -> teks status lampu",
+        "func": "// topic: pens/klpX/ruangN/lampM/state -> output ke-(N-1)*2+(M-1)\nconst p = msg.topic.split(\"/\");\nconst room = parseInt(p[2].replace(\"ruang\", \"\"));\nconst lamp = parseInt(p[3].replace(\"lamp\", \"\"));\nif (!(room >= 1 && room <= 4 && (lamp === 1 || lamp === 2))) return null;\nconst v = String(msg.payload).trim();\nif (v !== \"1\" && v !== \"0\") return null;\nconst txt = v === \"1\" ? '<font color=\"green\"><b>NYALA</b></font>' : '<font color=\"gray\"><b>MATI</b></font>';\nconst out = new Array(8).fill(null);\nout[(room - 1) * 2 + (lamp - 1)] = { payload: txt };\nreturn out;",
+        "outputs": 8,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1360,
+        "wires": [
+            [
+                "4405e13c1fe48e85"
+            ],
+            [
+                "62dbeaa28ea519bf"
+            ],
+            [
+                "e981991a1781d2c7"
+            ],
+            [
+                "2dc22fc0ac777c68"
+            ],
+            [
+                "79a98fe6fdbeaadb"
+            ],
+            [
+                "40f8d33a55ae897f"
+            ],
+            [
+                "faf674eaad8dde49"
+            ],
+            [
+                "5cb91751fc0f61bb"
+            ]
+        ]
+    },
+    {
+        "id": "4405e13c1fe48e85",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 1 ruang1",
+        "label": "Status Lampu 1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 920,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "62dbeaa28ea519bf",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "1b8c93f7fd2d4e7c",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 2 ruang1",
+        "label": "Status Lampu 2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "e981991a1781d2c7",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 1 ruang2",
+        "label": "Status Lampu 1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "2dc22fc0ac777c68",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "3c7ccafb0c42fbd6",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 2 ruang2",
+        "label": "Status Lampu 2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "79a98fe6fdbeaadb",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "74ca56f27dd6a552",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 1 ruang3",
+        "label": "Status Lampu 1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "40f8d33a55ae897f",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "74ca56f27dd6a552",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 2 ruang3",
+        "label": "Status Lampu 2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "faf674eaad8dde49",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "bd837bdfbf305cab",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 1 ruang4",
+        "label": "Status Lampu 1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "5cb91751fc0f61bb",
+        "type": "ui_text",
+        "z": "879f9b67e3dfedd9",
+        "group": "bd837bdfbf305cab",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Status lampu 2 ruang4",
+        "label": "Status Lampu 2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 920,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "f122d2dbf9de5e9d",
+        "type": "switch",
+        "z": "879f9b67e3dfedd9",
+        "name": "routing suhu per ruang",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ruang1",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang2",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang3",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ruang4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 920,
+        "y": 520,
+        "wires": [
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2b78818ec1bc1ff5",
+        "type": "inject",
+        "z": "879f9b67e3dfedd9",
+        "name": "Inisialisasi database SQLite",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "CREATE TABLE IF NOT EXISTS sensor_history (id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT NOT NULL, room TEXT NOT NULL, metric TEXT NOT NULL, value REAL NOT NULL)",
+        "x": 960,
+        "y": 320,
+        "wires": [
+            [
+                "dffcad504c5560ae"
+            ]
+        ]
+    },
+    {
+        "id": "dffcad504c5560ae",
+        "type": "sqlite",
+        "z": "879f9b67e3dfedd9",
+        "mydb": "44ee9c81415bc169",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "SQLite buat tabel riwayat",
+        "x": 1230,
+        "y": 320,
+        "wires": [
+            [
+                "9c8367e9fe28f6f2"
+            ]
+        ]
+    },
+    {
+        "id": "565dcc1854c17734",
+        "type": "function",
+        "z": "879f9b67e3dfedd9",
+        "name": "Siapkan data untuk SQLite",
+        "func": "const parts = String(msg.topic || \"\").split(\"/\");\nif (parts.length < 4) return null;\n\nconst room = parts[2];     // contoh: ruang1\nconst metric = parts[3];   // contoh: temperature / humidity\n\nif (![\"temperature\", \"humidity\"].includes(metric)) return null;\n\nconst value = Number(msg.payload);\nif (!Number.isFinite(value)) return null;\n\n// Format tanggal standar SQLite (YYYY-MM-DD HH:MM:SS)\nconst now = new Date().toISOString().slice(0, 19).replace('T', ' 합동 ');\n// Atau gunakan string ISO biasa:\nconst timestamp = new Date().toISOString();\n\n// Gabungkan langsung string SQL-nya ke msg.topic agar aman dari error NOT NULL\nmsg.topic = `INSERT INTO sensor_history (timestamp, room, metric, value) VALUES ('${timestamp}', '${room}', '${metric}', ${value})`;\nmsg.payload = null; // Kosongkan payload karena data sudah masuk ke string SQL\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 200,
+        "wires": [
+            [
+                "6029d57d2a6afeab"
+            ]
+        ]
+    },
+    {
+        "id": "6029d57d2a6afeab",
+        "type": "sqlite",
+        "z": "879f9b67e3dfedd9",
+        "mydb": "44ee9c81415bc169",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Simpan suhu dan kelembapan",
+        "x": 950,
+        "y": 260,
+        "wires": [
+            [
+                "9c8367e9fe28f6f2"
+            ]
+        ]
+    },
+    {
+        "id": "9c8367e9fe28f6f2",
+        "type": "debug",
+        "z": "879f9b67e3dfedd9",
+        "name": "SQLite hasil",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0b214e25b5b7b5aa",
+        "type": "mqtt-broker",
+        "name": "Broker EMQX",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "nodered-klp12",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "3",
+        "keepalive": "15",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e966d82025e9079e",
+        "type": "ui_group",
+        "name": "Suhu",
+        "tab": "874a195f211f03c1",
+        "order": 5,
+        "disp": true,
+        "width": "25",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1b8c93f7fd2d4e7c",
+        "type": "ui_group",
+        "name": "Ruang 1",
+        "tab": "874a195f211f03c1",
+        "order": 2,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3c7ccafb0c42fbd6",
+        "type": "ui_group",
+        "name": "Ruang 2",
+        "tab": "874a195f211f03c1",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "74ca56f27dd6a552",
+        "type": "ui_group",
+        "name": "Ruang 3",
+        "tab": "874a195f211f03c1",
+        "order": 4,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bd837bdfbf305cab",
+        "type": "ui_group",
+        "name": "Ruang 4",
+        "tab": "874a195f211f03c1",
+        "order": 5,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "44ee9c81415bc169",
+        "type": "sqlitedb",
+        "db": "./monitoring_ruangan.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "874a195f211f03c1",
+        "type": "ui_tab",
+        "name": "Gedung",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "847a6cefb79e502c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-node-sqlite": "2.0.1"
+        }
+    }
+]
