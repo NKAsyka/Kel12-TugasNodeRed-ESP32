@@ -1,7 +1,7 @@
 # KelX-TugasNodeRED-ESP32
 
 ## Video
-- Video presentasi (maks. 7 menit): **[isi link di sini]** gw jaog bat
+- Video presentasi (maks. 7 menit): **[isi link di sini]** 
 - Video demo alat (maks. 5 menit): **[https://youtu.be/EFjaDAxAD6o?si=UwSpxen0CkvJ5SAb]**
 
 ## Deskripsi
@@ -54,7 +54,7 @@ Fungsi | Topic | Arah | Payload |
 - Group **Suhu**: satu line chart dengan empat garis bernama `ruang1`–`ruang4`.
 - Group tiap ruangan: satu gauge kelembapan 0–100%, dua saklar lampu, dan indikator status koneksi.
 - Alamat lokal: `http://localhost:1883/ui`
-- Akses dari HP di jaringan yang sama: `http://IP_LAPTOP:1880/ui`
+- Akses dari HP di jaringan yang sama: `192.168.10.44:1883/ui`
 
 ## Menjalankan sisteml
 1. Install Node.js dan Node-RED, lalu jalankan Node-RED.
@@ -100,7 +100,6 @@ Status offline lama muncul | Retained LWT yang benar • publish online retained
 
 
 ## Struktur repository
-```text
 KelX-TugasNodeRED-ESP32/
 ├── README.md
 ├── esp32/esp32_ruang/esp32_ruang.ino
@@ -108,4 +107,4 @@ KelX-TugasNodeRED-ESP32/
 ├── docs/laporan.pdf
 ├── docs/images/
 └── video/LINK.md
-```
+
