@@ -71,7 +71,7 @@ Fungsi | Topic | Arah | Payload |
 ## Bukti dan pengujian
 - `fotp_rangkaian.png`
 - `flow.png`
-- `dashboard.jng`
+- `dashboard.jpg`
 - `uji_lampu.png`
 - `uji_status.png`
 
