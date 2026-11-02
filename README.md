@@ -69,9 +69,9 @@ Fungsi | Topic | Arah | Payload |
 9. Buka dashboard di `http://localhost:1880/ui` dan uji sensor, saklar, serta status.
 
 ## Bukti dan pengujian
-- `rangkaian.jpg`
+- `fotp_rangkaian.png`
 - `flow.png`
-- `dashboard.png`
+- `dashboard.jng`
 - `uji_lampu.png`
 - `uji_status.png`
 
