@@ -48,7 +48,7 @@ Fungsi | Topic | Arah | Payload |
 | Kelembapan | `pens/klp12/ruang1/humidity` | ESP32 → Node-RED | angka %, 1 desimal |
 | Lampu 1 | `pens/klp12/ruang1/lamp1` | Node-RED → ESP32 | string `1` / `0` |
 | Lampu 2 | `pens/klp12/ruang1/lamp2` | Node-RED → ESP32 | string `1` / `0` |
-| Status | `pens/klpX/ruang1/status` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
+| Status | `pens/klp12/ruang1/status` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
 
 
 ## Isi dashboard
