@@ -39,17 +39,16 @@ ESP32 Ruang 4 ─┘       └── perintah lampu┘
 ## Broker dan topik MQTT
 - Broker: `broker.emqx.io`
 - Port: `1883`
-- Prefix wajib: `pens/klp12/` 
+- Prefix wajib: `pens/klp12/`
 
-|
-Fungsi | Topic | Arah | Payload |
+| Fungsi | Topic | Arah | Payload |
 |---|---|---|---|
-| Suhu | `pens/klp12/ruang1/temperature` | ESP32 → Node-RED | angka °C, 1 desimal |
-| Kelembapan | `pens/klp12/ruang1/humidity` | ESP32 → Node-RED | angka %, 1 desimal |
-| Lampu 1 | `pens/klp12/ruang1/lamp1` | Node-RED → ESP32 | string `1` / `0` |
-| Lampu 2 | `pens/klp12/ruang1/lamp2` | Node-RED → ESP32 | string `1` / `0` |
-| Status | `pens/klp12/ruang1/status` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
-
+| Suhu | `pens/klp12/ruangX/temperature` | ESP32 → Node-RED | angka °C, 1 desimal |
+| Kelembapan | `pens/klp12/ruangX/humidity` | ESP32 → Node-RED | angka %, 1 desimal |
+| Saklar Lampu | `pens/klp12/ruangX/lampX/set` | Node-RED → ESP32 | string `1` / `0` |
+| Status Lampu | `pens/klp12/ruangX/lampX/state` | Node-RED → ESP32 | string `1` / `0` |
+| Status ESP | `pens/klp12/ruangX/pstatus` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
+Catatan : `tanda X diganti dengan nomor, baik ruang maupun lampu`
 
 ## Isi dashboard
 - Tab: **Gedung**
