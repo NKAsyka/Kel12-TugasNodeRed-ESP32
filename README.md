@@ -89,7 +89,7 @@ Fungsi | Topic | Arah | Payload |
 | T11 Reconnect | [✓] | ESP32 tersambung kembali otomatis dan status kembali online |
 | T12 Akses HP | [✓] | Dashboard dan saklar berfungsi dari HP di jaringan yang sama |
 
-Ruangan simulasi (jika ada): **[tulis ruang dan metode simulasi; minimal 2 ESP32 sungguhan sesuai modul]**
+Ruangan simulasi (jika ada): tidak ada
 
 ## Kendala dan solusi
 | Kendala | Solusi yang dilakukan |
