@@ -48,7 +48,10 @@ ESP32 Ruang 4 ─┘       └── perintah lampu┘
 | Saklar Lampu | `pens/klp12/ruangX/lampX/set` | Node-RED → ESP32 | string `1` / `0` |
 | Status Lampu | `pens/klp12/ruangX/lampX/state` | Node-RED → ESP32 | string `1` / `0` |
 | Status ESP | `pens/klp12/ruangX/pstatus` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
-Catatan : `tanda X diganti dengan nomor, baik ruang maupun lampu`
+
+```text
+Catatan : tanda X diganti dengan nomor, baik ruang maupun lampu
+```
 
 ## Isi dashboard
 - Tab: **Gedung**
