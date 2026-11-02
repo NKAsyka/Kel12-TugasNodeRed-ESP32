@@ -72,7 +72,7 @@ Fungsi | Topic | Arah | Payload |
 - `fotp_rangkaian.png`
 - `flow.png`
 - `dashboard.jpg`
-- `uji_lampu.png`
+- `Uji_Lampu.webp`
 - `uji_status.png`
 
 | Uji | Hasil | Keterangan |
