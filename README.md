@@ -1,7 +1,7 @@
 # Kel12-TugasNodeRED-ESP32
 
 ## Video
-- Video presentasi (maks. 7 menit): **[https://drive.google.com/file/d/1XIcBbFof-WR9SOHgMw_B3jEM0WmLTeT6/view?usp=drivesdk]llll** 
+- Video presentasi (maks. 7 menit): **[https://drive.google.com/file/d/1XIcBbFof-WR9SOHgMw_B3jEM0WmLTeT6/view?usp=drivesdk]** 
 - Video demo alat (maks. 5 menit): **[https://youtu.be/EFjaDAxAD6o?si=UwSpxen0CkvJ5SAb]**
 
 ## Deskripsi
