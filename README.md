@@ -13,7 +13,7 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 | 1 | Moh Akmalul Ihsan      | (2124600093) | integrasi ESP32 dan MQTT   |
 | 2 | Moh Jefri Al Bukhori   | (2124600098) | dokumentasi dan pengujian  |
 | 3 | Ahmad Syahrial Karim   | (2124600100) | dashboard Node-RED         |
-| 4 | Lailiah Ratu Nova      | (2124600104integrasi GitHub dan video |
+| 4 | Lailiah Ratu Nova      | (2124600104) | integrasi GitHub dan video |
 
 
 ## Arsitektur
