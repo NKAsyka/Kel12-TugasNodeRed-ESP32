@@ -1,7 +1,7 @@
-# KelX-TugasNodeRED-ESP32
+# Kel12-TugasNodeRED-ESP32
 
 ## Video
-- Video presentasi (maks. 7 menit): **[isi link di sini]** 
+- Video presentasi (maks. 7 menit): **[https://drive.google.com/file/d/1XIcBbFof-WR9SOHgMw_B3jEM0WmLTeT6/view?usp=drivesdk]llll** 
 - Video demo alat (maks. 5 menit): **[https://youtu.be/EFjaDAxAD6o?si=UwSpxen0CkvJ5SAb]**
 
 ## Deskripsi
@@ -10,10 +10,10 @@ Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengiri
 ## Anggota Kelompok
 | Anggota | Nama | NRP | Tanggung jawab |
 |---|---|---|---|
-| 1 | Moh Akmalul Ihsan      | (2124600093) | Ruang 1; integrasi ESP32 dan MQTT   |
-| 2 | Moh Jefri Al Bukhori   | (2124600098) | Ruang 2; dokumentasi dan pengujian  |
-| 3 | Ahmad Syahrial Karim   | (2124600100) | Ruang 3; dashboard Node-RED         |
-| 4 | Lailiah Ratu Nova      | (2124600104) | Ruang 4; integrasi GitHub dan video |
+| 1 | Moh Akmalul Ihsan      | (2124600093) | integrasi ESP32 dan MQTT   |
+| 2 | Moh Jefri Al Bukhori   | (2124600098) | dokumentasi dan pengujian  |
+| 3 | Ahmad Syahrial Karim   | (2124600100) | dashboard Node-RED         |
+| 4 | Lailiah Ratu Nova      | (2124600104integrasi GitHub dan video |
 
 
 ## Arsitektur
