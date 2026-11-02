@@ -8,12 +8,12 @@
 Sistem monitoring IoT ini menggunakan empat ESP32 dan sensor DHT11 untuk mengirim suhu serta kelembapan setiap ruangan melalui MQTT. Node-RED menerima data, menampilkan grafik dan gauge pada dashboard, serta mengirim perintah untuk mengendalikan dua lampu LED di masing-masing ruangan.
 
 ## Anggota Kelompok
-| Anggota | Nama | NRP | Tanggung jawab |
+| Anggota | Nama | NRP | Tanggung jawab | Ruangan yang di pegang |
 |---|---|---|---|
-| 1 | Moh Akmalul Ihsan      | (2124600093) | integrasi ESP32 dan MQTT   |
-| 2 | Moh Jefri Al Bukhori   | (2124600098) | dokumentasi dan pengujian  |
-| 3 | Ahmad Syahrial Karim   | (2124600100) | dashboard Node-RED         |
-| 4 | Lailiah Ratu Nova      | (2124600104) | integrasi GitHub dan video |
+| 1 | Moh Akmalul Ihsan      | (2124600093) | integrasi ESP32 dan MQTT   | Ruang1 |
+| 2 | Moh Jefri Al Bukhori   | (2124600098) | dokumentasi dan pengujian  | Ruang2 |
+| 3 | Ahmad Syahrial Karim   | (2124600100) | dashboard Node-RED         | Ruang3 |
+| 4 | Lailiah Ratu Nova      | (2124600104) | integrasi GitHub dan video | Ruang4 |
 
 
 ## Arsitektur
@@ -22,7 +22,7 @@ Alur data: empat ESP32 mem-publish temperature, humidity, dan status ke broker, 
 ```text
 ESP32 Ruang 1 ─┐
 ESP32 Ruang 2 ─┼──> MQTT broker ──> Node-RED ──> Dashboard /ui
-ESP32 Ruang 3 ─┤       ▲                │
+ESP32 Ruang 3 ─┤       ▲                 │
 ESP32 Ruang 4 ─┘       └── perintah lampu┘
 
 ```
