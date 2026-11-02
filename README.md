@@ -50,7 +50,7 @@ ESP32 Ruang 4 ─┘       └── perintah lampu┘
 | Status ESP | `pens/klp12/ruangX/pstatus` | ESP32/LWT → Node-RED | `online` / `offline`, retained |
 
 ```text
-Catatan : tanda X diganti dengan nomor, baik ruang maupun lampu
+Catatan : tanda X diganti dengan nomor, baik ruang maupun lampu (contoh : ruang1, lamp2)
 ```
 
 ## Isi dashboard
@@ -71,7 +71,7 @@ Catatan : tanda X diganti dengan nomor, baik ruang maupun lampu
 9. Buka dashboard di `http://localhost:1880/ui` dan uji sensor, saklar, serta status.
 
 ## Bukti dan pengujian
-- `fotp_rangkaian.png`
+- `foto_rangkaian.png`
 - `flow.png`
 - `dashboard.jpg`
 - `Uji_Lampu.webp`
